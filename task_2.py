@@ -8,7 +8,7 @@ class Movies:
 
 class Comedy(Movies):
     def add_movie(self, movie):
-        super().add_movie(movie)  # вызываем метод родител
+        super().add_movie(movie)  # вызываем метод родителя
         return f"Комедии: {self.movies}"
 
 
