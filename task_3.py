@@ -1,45 +1,43 @@
 class PointsForPlace:
     @staticmethod
     def get_points_for_place(place):
-        points = 0
+        """Начисляет баллы в зависимости от занятого места."""
         if place > 100:
             print('Баллы начисляются только первым 100 участникам')
+            return 0
         elif place < 1:
             print('Спортсмен не может занять нулевое или отрицательное место')
-        else:
-            points = 101 - place
-        return points
+            return 0
+        return 101 - place  # 1-е место = 100 баллов, 100-е = 1 балл
 
 
 class PointsForMeters:
     @staticmethod
     def get_points_for_meters(meters):
-        points = 0
+        """Начисляет баллы за количество метров."""
         if meters < 0:
             print('Количество метров не может быть отрицательным')
-        else:
-            points = meters * 0.5
-        return points
+            return 0
+        return meters * 0.5  # 1 метр = 0.5 балла
 
 
 class TotalPoints(PointsForPlace, PointsForMeters):
-    @staticmethod
-    def get_total_points(meters, place):
-        total = (
-            PointsForPlace.get_points_for_place(place)
-            + PointsForMeters.get_points_for_meters(meters)
-        )
+    def get_total_points(self, meters, place):
+        """Возвращает общее количество баллов за место и метры."""
+        total = self.get_points_for_place(place) + self.get_points_for_meters(meters)
         return total
 
 
-# Проверка
-points_for_place = PointsForPlace()
-print(points_for_place.get_points_for_place(10))   # 91
+# ===== Пример использования =====
+if __name__ == "__main__":
+    total_points = TotalPoints()
 
-points_for_meters = PointsForMeters()
-print(points_for_meters.get_points_for_meters(10))  # 5.0
+    # Примеры расчёта
+    print("Пример 1:")
+    print(total_points.get_total_points(300, 10))  # 300 м и 10-е место
 
-total_points = TotalPoints()
-print(total_points.get_points_for_place(10))        # 91
-print(total_points.get_points_for_meters(10))       # 5.0
-print(total_points.get_total_points(100, 10))       # 141.0
+    print("\nПример 2:")
+    print(total_points.get_total_points(150, 1))   # 150 м и 1-е место
+
+    print("\nПример 3 (ошибка):")
+    print(total_points.get_total_points(-50, 200)) # Ошибочные данные

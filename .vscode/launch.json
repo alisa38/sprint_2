@@ -1,0 +1,14 @@
+{
+    // Конфигурация отладки Python
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",          // Запуск текущего открытого файла
+            "console": "integratedTerminal", // Используем встроенный терминал
+            "justMyCode": true             // Отлаживаем только твой код, без библиотек
+        }
+    ]
+}
